@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="warn">
+    <Appenders>
+        <Console name="LogToConsole" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+        <RollingFile name="LogToFile" fileName="logs/test.log"
+                    filePattern="logs/test-%d{MM-dd-yyyy}-%i.log">
+        <PatternLayout>
+            <Pattern>%d %p %c{1.} [%t] %m%n</Pattern>
+        </PatternLayout>
+        <Policies>
+            <TimeBasedTriggeringPolicy />
+            <SizeBasedTriggeringPolicy size="10 MB"/>
+        </Policies>
+        <DefaultRolloverStrategy max="10"/>
+    </RollingFile>
+
+    </Appenders>
+    
+    
+    <Loggers>
+    <Logger name="freemarker.cache" 
+   additivity="false" level="warn">
+   <appender-ref ref="LogToConsole"/>
+</Logger>
+
+    <Logger name="freemarker.runtime" 
+   additivity="false" level="warn">
+   <appender-ref ref="LogToConsole"/>
+</Logger>
+ <Logger name="freemarker.runtime.attempt" 
+   additivity="false" level="warn">
+   <appender-ref ref="LogToConsole"/>
+</Logger>
+   
+
+        <Root level="warn">
+            <AppenderRef ref="LogToConsole"/>
+            <AppenderRef ref="LogToFile"/>
+        </Root>
+    </Loggers>
+</Configuration>
